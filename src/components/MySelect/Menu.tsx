@@ -6,7 +6,6 @@ import { OptionType } from './index';
 
 export const menu = (error: boolean) => {
     return (props: MenuProps<MenuProps<OptionType>>) => {
-        console.log(props);
         return (
             <Paper {...props.innerProps} className={`select${error ? ' error': ''}`}>{props.children}</Paper>
         );
