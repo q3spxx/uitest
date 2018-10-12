@@ -1,6 +1,7 @@
 import * as React from "react";
 import { MuiThemeProvider, createMuiTheme, withStyles } from "@material-ui/core";
-import { MySelect } from "./MySelect";
+import { Select } from "./Select";
+import { MultiSelect } from "./MultiSelect";
 
 const theme = createMuiTheme({
     overrides: {
@@ -29,6 +30,7 @@ const theme = createMuiTheme({
                     padding: 5,
                     minHeight: 'auto',
                     minWidth: 400,
+                    height: 24,
                     justifyContent: 'left',
 
                     '&:hover': {
@@ -203,7 +205,7 @@ const errorMessage = 'Error message';
 
 export class Hello extends React.Component {
     state = {
-        value: options[0],
+        value: [options4[0]],
         value2: options2[0],
         value3: options3[0],
         value4: options4[0],
@@ -213,12 +215,13 @@ export class Hello extends React.Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <MySelect label='Numeric' onChange={(value:any) => this.setState({value2: value})} value={this.state.value2} options={options2} />
-                <MySelect label='Numeric' onChange={(value:any) => this.setState({value5: value})} value={this.state.value5} options={options5} />
-                <MySelect label='Error' errorMessage={errorMessage} error={this.state.error} onChange={(value:any) => this.setState({value2: value, error: false})} value={this.state.value2} options={options2} />
-                <MySelect bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value: value})} value={this.state.value} options={options} />
-                <MySelect bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value4: value})} value={this.state.value4} options={options4} />
-                <MySelect label='Template' bindLabel='label' template={template} onChange={(value:any) => this.setState({value3: value})} value={this.state.value3} options={options3} />
+                <Select label='Numeric' onChange={(value:any) => this.setState({value2: value})} value={this.state.value2} options={options2} />
+                <MultiSelect label='Multi' bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value: value})} value={this.state.value} options={options4} />
+                {/* <Select label='Numeric' onChange={(value:any) => this.setState({value5: value})} value={this.state.value5} options={options5} />
+                <Select label='Error' errorMessage={errorMessage} error={this.state.error} onChange={(value:any) => this.setState({value2: value, error: false})} value={this.state.value2} options={options2} />
+                <Select bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value: value})} value={this.state.value} options={options} />
+                <Select bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value4: value})} value={this.state.value4} options={options4} />
+                <Select label='Template' bindLabel='label' template={template} onChange={(value:any) => this.setState({value3: value})} value={this.state.value3} options={options3} /> */}
             </MuiThemeProvider>
         );
     }
