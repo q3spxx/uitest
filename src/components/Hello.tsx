@@ -237,6 +237,7 @@ export class Hello extends React.Component<Props, State> {
         value: options[0],
         value2: options[0],
         value3: options[0],
+        value4: [options5[0]],
         bindLabel: 'label',
         inputValue: '',
     }
@@ -279,6 +280,18 @@ export class Hello extends React.Component<Props, State> {
                         options={options}
                         onChange={(value:any) => {
                             this.setState({value3: value});
+                        }}
+                        />
+                </div>
+                <div>
+                    <MultiSelect
+                        bindLabel={this.state.bindLabel}
+                        bindValue='value'
+                        placeholder="placeholder"
+                        value={this.state.value}
+                        options={options}
+                        onChange={(value:any) => {
+                            this.setState({value: value});
                         }}
                         />
                 </div>

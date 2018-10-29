@@ -31,6 +31,7 @@ const styles = {
     container: (base: React.CSSProperties) =>({
         ...base,
         display: 'inline-block',
+        width: 300,
     }),
     control: () => ({}),
     valueContainer: () => ({}),

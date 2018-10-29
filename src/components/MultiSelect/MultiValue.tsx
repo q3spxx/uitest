@@ -5,7 +5,7 @@ export const MultiValue = (props: any) => {
     // console.log(props);
     return (
         <>
-            <Chip label={props.data.value} />
+            <Chip label={props.data.label} />
         </>
     );
 }
