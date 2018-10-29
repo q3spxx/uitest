@@ -3,6 +3,7 @@ import { MuiThemeProvider, Input as MuiInput, Select as MuiSelect, createMuiThem
 import { Select } from "./Select";
 import { MultiSelect } from "./MultiSelect";
 import { Input } from "./Input";
+import { SelectV2 } from "./SelectV2";
 
 const theme = createMuiTheme({
     props: {
@@ -224,6 +225,7 @@ const errorMessage = 'Error message';
 interface Props {};
 interface State {
     value: any;
+    value2: any;
     bindLabel: string;
     inputValue: string;
 }
@@ -231,6 +233,7 @@ interface State {
 export class Hello extends React.Component<Props, State> {
     state = {
         value: options[0],
+        value2: options[0],
         bindLabel: 'label',
         inputValue: '',
     }
@@ -247,6 +250,19 @@ export class Hello extends React.Component<Props, State> {
                         options={options}
                         onChange={(value:any) => {
                             this.setState({value: value});
+                        }}
+                        />
+                </div>
+                <div>
+                    <SelectV2
+                        label='Numeric'
+                        placeholder="placeholder"
+                        bindLabel={this.state.bindLabel}
+                        bindValue='value'
+                        value={this.state.value2}
+                        options={options}
+                        onChange={(value:any) => {
+                            this.setState({value2: value});
                         }}
                         />
                 </div>

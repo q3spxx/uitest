@@ -8,6 +8,7 @@ export const ValueContainer = (customProps: any) => {
     const customSingleValueProps = {bindValue, bindLabel, placeholder, data: {}};
     const singleValue = SingleValue(customSingleValueProps)
     return (props: any) => {
+        console.log(props);
         const singleValueProps = props.children[0].props;
         const inputValueProps = props.children[1].props;
         customSingleValueProps.data = singleValueProps.data;
