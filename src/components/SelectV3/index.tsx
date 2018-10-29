@@ -44,27 +44,35 @@ const styles = {
     }),
 }
 
-export class SelectV2 extends React.Component<Props, State> {
 
-    private ValueContainer = (props: any) => {
+const ValueContainer = (key: string, bindLabel: string) => {
+    console.log('vc');
+    return (props: any) => {
         const singleValueProps = props.children[0].props;
         const inputValueProps = props.children[1].props;
         return (
             <Button
+                key={key}
                 buttonRef={inputValueProps.innerRef}
                 onFocus={inputValueProps.onFocus}
                 onBlur={inputValueProps.onBlur}
             >
-                {singleValueProps.data[this.props.bindLabel]}
+                {singleValueProps.data[bindLabel]}
             </Button>
         );
     }
+}
+
+export class SelectV3 extends React.Component<Props, State> {
+
+    private key = 'ok';
 
     render() {
         const {
             value,
             options,
             onChange,
+            bindLabel,
         } = this.props;
         return (
             <SelectBase
@@ -76,7 +84,7 @@ export class SelectV2 extends React.Component<Props, State> {
                     Option: DropdownMenuItem,
                     MenuList: DropdownMenuList,
                     Menu: DropdownMenu,
-                    ValueContainer: this.ValueContainer,
+                    ValueContainer: ValueContainer(this.key, bindLabel),
                 }}
                 options={options}
                 onChange={onChange}
