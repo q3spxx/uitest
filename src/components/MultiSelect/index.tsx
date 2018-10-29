@@ -31,7 +31,12 @@ const styles = {
     container: (base: React.CSSProperties) =>({
         ...base,
         display: 'inline-block',
-    })
+    }),
+    control: () => ({}),
+    valueContainer: () => ({}),
+    indicatorsContainer: () => ({
+        display: 'none',
+    }),
 }
 
 export class MultiSelect extends React.Component<IProps> {
@@ -59,13 +64,10 @@ export class MultiSelect extends React.Component<IProps> {
                 isMulti={true}
                 closeMenuOnSelect={false}
                 components={{
-                    Control: Control({error, errorMessage, bindLabel, label}),
-                    ValueContainer: ValueContainer(),
                     MultiValue,
-                    Menu: DropdownMenu({error}),
-                    MenuList: DropdownMenuList(),
-                    Option: DropdownMenuItem({Template, bindValue, bindLabel}),
-                    IndicatorsContainer: IndicatorsContainer(),
+                    Menu: DropdownMenu,
+                    MenuList: DropdownMenuList,
+                    Option: DropdownMenuItem,
                 }}
                 options={options}
                 onChange={onChange}

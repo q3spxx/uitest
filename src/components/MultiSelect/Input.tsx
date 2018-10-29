@@ -4,6 +4,7 @@ import { InputComponent } from './InputComponent';
 
 export const Input = (value: any) => {
     return (props: any) => {
+        console.log(props);
         return (
             <ValidationInput
                 InputProps={{

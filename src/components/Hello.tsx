@@ -1,9 +1,15 @@
 import * as React from "react";
-import { MuiThemeProvider, createMuiTheme, withStyles } from "@material-ui/core";
+import { MuiThemeProvider, Input as MuiInput, Select as MuiSelect, createMuiTheme, withStyles } from "@material-ui/core";
 import { Select } from "./Select";
 import { MultiSelect } from "./MultiSelect";
+import { Input } from "./Input";
 
 const theme = createMuiTheme({
+    props: {
+        MuiButton: {
+            disableRipple: true,
+        }
+    },
     overrides: {
         MuiPaper: {
             root: {
@@ -27,14 +33,16 @@ const theme = createMuiTheme({
             root: {
                 '&.select': {
                     textTransform: 'none',
-                    padding: 5,
+                    padding: 6,
                     minHeight: 'auto',
                     minWidth: 400,
-                    height: 24,
+                    height: 32,
                     justifyContent: 'left',
+                    fontSize: 12,
+                    lineHeight: '18px',
 
                     '&:hover': {
-                        backgroundColor: 'white',
+                        backgroundColor: '#FFF',
                     }
                 }
             }
@@ -102,7 +110,18 @@ const theme = createMuiTheme({
                     right: 0
                 }
             }
-        }
+        },
+        MuiInputBase: {
+            input: {
+                padding: 6,
+                fontSize: 12,
+                lineHeight: '18px',
+                width: 360,
+                '&.flexible': {
+                    width: '100%',
+                }
+            },
+        },
     }
 });
 
@@ -202,26 +221,35 @@ const Template = (props: Option3 & Style) => {
 const template = withStyles(style)(Template);
 
 const errorMessage = 'Error message';
+interface Props {};
+interface State {
+    value: any;
+    bindLabel: string;
+    inputValue: string;
+}
 
-export class Hello extends React.Component {
+export class Hello extends React.Component<Props, State> {
     state = {
-        value: [options4[0]],
-        value2: options2[0],
-        value3: options3[0],
-        value4: options4[0],
-        value5: options5[0],
-        error: true
+        value: options[0],
+        bindLabel: 'label',
+        inputValue: '',
     }
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <Select label='Numeric' onChange={(value:any) => this.setState({value2: value})} value={this.state.value2} options={options2} />
-                <MultiSelect label='Multi' bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value: value})} value={this.state.value} options={options4} />
-                {/* <Select label='Numeric' onChange={(value:any) => this.setState({value5: value})} value={this.state.value5} options={options5} />
-                <Select label='Error' errorMessage={errorMessage} error={this.state.error} onChange={(value:any) => this.setState({value2: value, error: false})} value={this.state.value2} options={options2} />
-                <Select bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value: value})} value={this.state.value} options={options} />
-                <Select bindValue='value' bindLabel='label' onChange={(value:any) => this.setState({value4: value})} value={this.state.value4} options={options4} />
-                <Select label='Template' bindLabel='label' template={template} onChange={(value:any) => this.setState({value3: value})} value={this.state.value3} options={options3} /> */}
+                <div>
+                    <Select
+                        label='Numeric'
+                        placeholder="placeholder"
+                        bindLabel={this.state.bindLabel}
+                        bindValue='value'
+                        value={this.state.value}
+                        options={options}
+                        onChange={(value:any) => {
+                            this.setState({value: value});
+                        }}
+                        />
+                </div>
             </MuiThemeProvider>
         );
     }

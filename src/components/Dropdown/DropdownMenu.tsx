@@ -7,10 +7,19 @@ interface IProps {
     error: boolean;
 }
 
-export const DropdownMenu = ({error}:IProps) => {
-    return (props: MenuProps<MenuProps<OptionType>>) => {
-        return (
-            <Paper {...props.innerProps} className={`select${error ? ' error': ''}`}>{props.children}</Paper>
-        );
-    };
+// export const DropdownMenu = ({error}:IProps) => {
+//     return (props: MenuProps<OptionType>) => {
+//         return (
+//             <Paper
+//             {...props.innerProps}
+//             className={`select${error ? ' error': ''}`}>{props.children}</Paper>
+//         );
+//     };
+// }
+export const DropdownMenu = (props: MenuProps<OptionType>) => {
+    return (
+        <Paper
+        {...props.innerProps}
+        className='select'>{props.children}</Paper>
+    );
 }

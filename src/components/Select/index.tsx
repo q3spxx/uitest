@@ -8,10 +8,12 @@ import { DropdownMenu } from '../Dropdown/DropdownMenu';
 import { IndicatorsContainer } from './IndicatorsContainer';
 import { Input } from './Input';
 import { ValueContainer } from './ValueContainer';
+import { SingleValue } from './SingleValue';
+import { SingleValueProps } from 'react-select/lib/components/SingleValue';
 
 export type OptionType = any;
 
-interface IProps {
+interface Props {
     options: OptionsType<OptionType>;
     value: OptionType;
     label?: string;
@@ -25,44 +27,60 @@ interface IProps {
     onChange: (value: OptionType, action: ActionMeta) => void;
 }
 
+interface State {
+    ValueContainer: any;
+}
+
 
 const styles = {
     container: (base: React.CSSProperties) =>({
         ...base,
         display: 'inline-block',
-    })
+    }),
+    control: () => ({}),
+    valueContainer: () => ({}),
+    indicatorsContainer: () => ({
+        display: 'none',
+    }),
 }
 
-export class Select extends React.Component<IProps> {
+export class Select extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.customProps = {...props};
+        this.setCustomProps();
+        this.state = {
+            ValueContainer: ValueContainer(this.customProps),
+        }
+    }
+    
+    private customProps: Props;
+
+    setCustomProps() {
+        const { bindValue, bindLabel, placeholder } = this.props;
+        this.customProps.bindLabel = bindLabel;
+        this.customProps.bindValue = bindValue;
+        this.customProps.placeholder = placeholder;
+    }
+
     render() {
         const {
-            disabled,
             value,
-            placeholder,
-            error,
-            errorMessage,
-            bindValue,
-            bindLabel,
-            Template,
             options,
             onChange,
-            label,
         } = this.props;
+        this.setCustomProps();
         return (
             <SelectBase
-                isDisabled={disabled}
                 styles={styles}
                 value={value}
-                placeholder=''
-                openMenuOnClick={true}
+                isSearchable={false}
+                closeMenuOnSelect={false}
                 components={{
-                    Control: Control({}),
-                    Option: DropdownMenuItem({Template, bindValue, bindLabel}),
-                    MenuList: DropdownMenuList(),
-                    Menu: DropdownMenu({error}),
-                    Input: Input(value),
-                    ValueContainer: ValueContainer(),
-                    IndicatorsContainer: IndicatorsContainer(),
+                    Option: DropdownMenuItem,
+                    MenuList: DropdownMenuList,
+                    Menu: DropdownMenu,
+                    ValueContainer: this.state.ValueContainer,
                 }}
                 options={options}
                 onChange={onChange}

@@ -5,10 +5,15 @@ import { InputProps } from '@material-ui/core/Input';
 type CustomProps<T extends InputProps> = any;
 
 interface IProps {
+    inputRef?: any;
+    value?: string;
     inputProps?: any;
-    InputProps?: CustomProps<InputProps>,
+    InputProps?: CustomProps<InputProps>;
     placeholder?: string;
     onClick?: any;
+    onChange?: React.EventHandler<any>;
+    onFocus?: any;
+    onBlur?: any;
     label?: string;
     disabled?: boolean;
     error?: boolean;
@@ -16,6 +21,7 @@ interface IProps {
 }
 
 export const ValidationInput = ({
+        inputRef,
         inputProps,
         InputProps,
         placeholder,
@@ -24,9 +30,15 @@ export const ValidationInput = ({
         disabled,
         error,
         errorMessage,
+        value,
+        onChange,
+        onFocus,
+        onBlur,
     }: IProps) => {
     return (
         <TextField
+            inputRef={inputRef}
+            value={value}
             error={error}
             helperText={errorMessage}
             disabled={disabled}
@@ -39,6 +51,9 @@ export const ValidationInput = ({
             label={label}
             placeholder={placeholder}
             onClick={onClick}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
         />
     );
-}
+};
