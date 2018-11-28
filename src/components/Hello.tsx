@@ -1,10 +1,8 @@
 import * as React from "react";
 import { MuiThemeProvider, Input as MuiInput, Select as MuiSelect, createMuiTheme, withStyles } from "@material-ui/core";
 import { Select } from "./Select";
-import { MultiSelect } from "./MultiSelect";
 import { Input } from "./Input";
-import { SelectV2 } from "./SelectV2";
-import { SelectV3 } from "./SelectV3";
+import { Scrollbar } from "./Scrollbar";
 
 const theme = createMuiTheme({
     props: {
@@ -13,6 +11,18 @@ const theme = createMuiTheme({
         }
     },
     overrides: {
+        MuiTypography: {
+            button: {
+                '&.placeholder': {
+                    fontWeight: 400,
+                    fontSize: 14,
+                    position: 'absolute',
+                    textTransform: 'initial',
+                    color: 'rgba(0, 0, 0, .4)',
+                    lineHeight: '18px',
+                },
+            },
+        },
         MuiPaper: {
             root: {
                 '&.select': {
@@ -151,24 +161,24 @@ const options = [
 ];
 const options4 = [
     {
-        label: 10,
-        value: 'Ten',
+        foo: 10,
+        bar: 'Ten',
     },
     {
-        label: 9,
-        value: 'Nine',
+        foo: 9,
+        bar: 'Nine',
     },
     {
-        label: 8,
-        value: 'Eight',
+        foo: 8,
+        bar: 'Eight',
     },
     {
-        label: 7,
-        value: 'Seven',
+        foo: 7,
+        bar: 'Seven',
     },
     {
-        label: 6,
-        value: 'Six',
+        foo: 6,
+        bar: 'Six',
     }
 ];
 
@@ -234,8 +244,8 @@ interface State {
 
 export class Hello extends React.Component<Props, State> {
     state = {
-        value: options[0],
-        value2: options[0],
+        value: options4[0].foo,
+        value2: options[0].value,
         value3: options[0],
         value4: [options5[0]],
         bindLabel: 'label',
@@ -244,20 +254,58 @@ export class Hello extends React.Component<Props, State> {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
-                <div>
+                {/* <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100vw', height: '100vh'}}>
+                    <div style={{display: 'flex', maxHeight: 400}}>
+                    <div>
+                        <Scrollbar>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                            <p>lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol lol </p>
+                        </Scrollbar>
+                    </div>
+                    <div style={{width: 200, height: 300, backgroundColor: 'red'}}></div>
+                    </div>
+                </div> */}
+                 <div>
                     <Select
                         label='Numeric'
                         placeholder="placeholder"
-                        bindLabel={this.state.bindLabel}
-                        bindValue='value'
                         value={this.state.value}
-                        options={options}
+                        options={options4}
+                        bindLabel='bar'
+                        bindValue='foo'
                         onChange={(value:any) => {
                             this.setState({value: value});
                         }}
                         />
                 </div>
-                <div>
+               {/* <div>
                     <SelectV2
                         label='Numeric'
                         placeholder="placeholder"
@@ -294,7 +342,7 @@ export class Hello extends React.Component<Props, State> {
                             this.setState({value: value});
                         }}
                         />
-                </div>
+                </div> */}
             </MuiThemeProvider>
         );
     }
