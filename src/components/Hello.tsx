@@ -245,7 +245,7 @@ interface State {
 export class Hello extends React.Component<Props, State> {
     state = {
         value: options4[0].foo,
-        value2: options[0].value,
+        value2: options5[0],
         value3: options[0],
         value4: [options5[0]],
         bindLabel: 'label',
@@ -296,12 +296,10 @@ export class Hello extends React.Component<Props, State> {
                     <Select
                         label='Numeric'
                         placeholder="placeholder"
-                        value={this.state.value}
-                        options={options4}
-                        bindLabel='bar'
-                        bindValue='foo'
+                        value={this.state.value2}
+                        options={options5}
                         onChange={(value:any) => {
-                            this.setState({value: value});
+                            this.setState({value2: value});
                         }}
                         />
                 </div>

@@ -14,7 +14,7 @@ import { ValidationInput } from '../ValidationInput';
 import InputBase, { InputBaseProps } from '@material-ui/core/InputBase';
 import { TextField, Input, Typography } from '@material-ui/core';
 import { ValueContainerProps } from 'react-select/lib/components/containers';
-import { map, is, always, prop, compose, head, filter, props, not, isNil } from 'ramda';
+import { map, is, always, prop, compose, head, filter, props, not, isNil, defaultTo } from 'ramda';
 import ifElse from 'ramda/es/ifElse';
 import identity from 'ramda/es/identity';
 import findLast from 'ramda/es/findLast';
@@ -100,6 +100,7 @@ export class Select extends React.Component<Props> {
             }, (v) => {
                 this.objectMode = false;
                 return compose(
+                    defaultTo({label: v, value: v}),
                     findLast(propEq(bindValue, v))
                 )(options);
             })(value);
@@ -122,7 +123,6 @@ export class Select extends React.Component<Props> {
                 }}
                 options={innerOptions}
                 onChange={(v) => {
-                    console.log(this.objectMode);
                     const output = ifElse(always(this.objectMode), identity, compose(head, filter(Boolean), props([bindValue, 'value'])))(v);
                     console.log(output);
                     onChange(output);

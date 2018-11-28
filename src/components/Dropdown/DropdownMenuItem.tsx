@@ -2,6 +2,8 @@ import * as React from 'react';
 import { MenuItem, Button } from '@material-ui/core';
 import { OptionProps } from 'react-select/lib/types';
 import ifElse from 'ramda/es/ifElse';
+import compose from 'ramda/es/compose';
+import { filter, props, head } from 'ramda';
 
 interface IProps {
     Template?: any;
@@ -10,16 +12,16 @@ interface IProps {
 }
 
 export const DropdownMenuItem = ({Template, bindValue, bindLabel}: IProps) => {
-    return (props: any) => {
-        const label = bindLabel ? props.data[bindLabel] : props.data.label;
+    return (p: any) => {
+        const label = bindLabel ? p.data[bindLabel] : compose(head, filter(Boolean), props([bindLabel, bindValue, 'label', 'value']))(p.data);
         return (
             <MenuItem
-                onClick={props.innerProps.onClick}
+                onClick={p.innerProps.onClick}
                 className='select-item'
                 disableRipple={true}
-                value={bindValue ? props.data[bindValue] : props.data}
+                value={bindValue ? p.data[bindValue] : p.data}
             >
-            {Template ? <Template {...props.data} /> : label}
+            {Template ? <Template {...p.data} /> : label}
             </MenuItem>
         );
     };
